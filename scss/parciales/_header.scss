@@ -1,0 +1,30 @@
+.header {
+    display: flex;
+    position: fixed;
+    background: #15599E;
+    width: 100vmax;
+    height: 10rem;
+    z-index: 100;
+
+    &__logo {
+        padding: 1rem;
+    }
+
+    &__nav{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+
+        &__item{
+            padding: 1rem;
+            list-style: none;
+            font-size: 2rem;
+            text-transform: uppercase;
+
+            &__decoracion{
+                text-decoration: none;
+            }
+        }
+    }
+}

@@ -20,19 +20,29 @@ class Turno {
 }
 
 
-// let btnPedir = document.getElementById('btnPedirTurno');
+//toma los datos ingresados en el html
 
-// let btnEliminar = document.getElementById('btnEliminarTurno');
+let formulario = document.getElementById("form");
 
+formulario.addEventListener('submit', (event) => {
+    event.preventDefault();
+    console.dir(event.target.children);
+    let valor = event.target.children;
+    console.log(valor[1].value);
 
-// let btnMostrar = document.getElementById('btnMostrarTurno');
+    const Turnos = new Turno(valor[0].value, valor[1].value);
+    console.log(Turnos);
+    let turnoNuevo = Turnos
+    if (turnoNuevo) {
 
-
-// let btnSalir = document.getElementById('btnSalirTurnero');
-
-
-// let Turnito = document.createElement('ul');
-
+        turnoNuevo.SetTurno(turno);
+        turno = turno + Math.floor(Math.random() + 1);
+        Miturno.push(turnoNuevo);
+        alert("Turno guardado")
+    }else {
+        alert("No se pudo guardar el turno");
+    }
+})
 
 
 
@@ -47,85 +57,51 @@ const Medicos = [{Especialidad: "clinica medica", Doctor: "oscar, rodriguez"},
 
 const ObraSocial= ["osam", "osde", "sancor", "sadop"];
 
-// let bucle = true;
-
-// alert("Bienvenidos al sanatorio de tomi");
-
-// while(bucle) {
-//     let pregunta = "Que desea hacer?: ";
-//     pregunta += "\n1. Sacar un Turno";
-//     pregunta += "\n2. Dar de baja mi turno";
-//     pregunta += "\n3. Mostrar mis turnos"; 
-//     pregunta += "\n4. Salir del turnero";
-
-//     let respuesta = parseInt(prompt(pregunta));
-
-//     switch (respuesta) {
-
-//         case 1:
-//             sacarTurno();
-//             pedirTurno();
-//             break;
-//         case 2:
-//             eliminarTurno();
-//             break;
-//         case 3:
-//             mostrarTurnos();
-//             break;
-//         case 4:
-//             alert("Gracias por usar el turnero!");
-//             bucle = false;
-//             break;
-//         default:
-//             alert("No ingresaste una opcion valida");
-//             break;
-//     }
-// }
 
 
 //Funcion para cargar el turno
 
 
 
-function pedirTurno(){
-    let turnoNuevo = SolicitarTurnoNuevo();
+// function pedirTurno(){
+//     let turnoNuevo = SolicitarTurnoNuevo();
 
-    if (turnoNuevo) {
+//     if (turnoNuevo) {
 
-        turnoNuevo.SetTurno(turno);
-        turno = turno + Math.floor(Math.random() + 1);
-        Miturno.push(turnoNuevo);
-        alert("Turno guardado")
-    }else {
-        alert("No se pudo guardar el turno");
-    }
-}
+//         turnoNuevo.SetTurno(turno);
+//         turno = turno + Math.floor(Math.random() + 1);
+//         Miturno.push(turnoNuevo);
+//         alert("Turno guardado")
+//     }else {
+//         alert("No se pudo guardar el turno");
+//     }
+// }
 
 
-// funcion que solicita especialidad y nombre del doctor;
+// // funcion que solicita especialidad y nombre del doctor;
 
-function SolicitarTurnoNuevo(){
-    let pedido = true;
+// function SolicitarTurnoNuevo(){
+//     let pedido = true;
 
-    while (pedido) {
-        let mensaje = "";
-        let especialidad = prompt("Ingrese al profesional que necesita: \npediatria \nclinica medica \nquinesiologia \nanestesiologia");
-        let doctores = prompt("Ingrese el nombre del medico que quiera que lo atienda: \nPediatra: antonio, muños ; hercules, martinez; jose, muller. \nClinica medica: oscar, rodriguez; marcelo, sanchez. \nAnestesiologia: rosa, marcello; panda, martinez. \nQuimiterapia: ana, marquez.");
+//     while (pedido) {
+//         let mensaje = "";
+//         let especialidad = prompt("Ingrese al profesional que necesita: \npediatria \nclinica medica \nquinesiologia \nanestesiologia");
+//         let doctores = prompt("Ingrese el nombre del medico que quiera que lo atienda: \nPediatra: antonio, muños ; hercules, martinez; jose, muller. \nClinica medica: oscar, rodriguez; marcelo, sanchez. \nAnestesiologia: rosa, marcello; panda, martinez. \nQuimiterapia: ana, marquez.");
 
-        if (!especialidad){
-            mensaje += "Debe ingresar una especialida valida";
-        }
-        if (!doctores){
-            mensaje += "Debe ingresar doctor valida";
-        }
-        if(mensaje !=""){
-            alert(mensaje);
-            pedido = confirm("Quieres cargar de nuevo los datos?");
-        }else {
-            return new Turno(especialidad, doctores);
-        }
-    }
-}
+//         if (!especialidad){
+//             mensaje += "Debe ingresar una especialida valida";
+//         }
+//         if (!doctores){
+//             mensaje += "Debe ingresar doctor valida";
+//         }
+//         if(mensaje !=""){
+//             alert(mensaje);
+//             pedido = confirm("Quieres cargar de nuevo los datos?");
+//         }else {
+//             return new Turno(especialidad, doctores);
+//         }
+//     }
+// }
 
 //Funcion que elimina el turno
 
@@ -178,13 +154,13 @@ function verTurno() {
 }
 
 
-let btnPedirTurno = document.getElementById('btnPedirTurno');
-function handleBtnPedirTurno () {
-    return pedirTurno()
-}
+// let btnPedirTurno = document.getElementById('btnPedirTurno');
+// function handleBtnPedirTurno () {
+//     return pedirTurno()
+// }
 
 
-btnPedirTurno.onclick = handleBtnPedirTurno;
+// btnPedirTurno.onclick = handleBtnPedirTurno;
 
 let btnEliminarTurno = document.getElementById('btnEliminarTurno');
 function handleBtnEliminarTurno () {

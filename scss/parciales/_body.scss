@@ -1,0 +1,32 @@
+.container {
+    background: white;
+    
+    
+    &__btn{
+        display: flex;
+        flex-direction: row;
+        padding-left: 25px;
+        justify-content: flex-start;
+        
+        &__button{
+            margin-right: 20px;
+        }
+    }
+}
+
+.form {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding-top: 20px;
+    height: 60px;
+
+    &__box {
+        padding-left: 2rem;
+    }
+
+    &__button {
+        border: 1px solid grey;
+        border-radius: 5px;
+    }
+}
