@@ -1,15 +1,18 @@
 .container {
     background: white;
+    padding: 1rem;
     
     
     &__btn{
         display: flex;
         flex-direction: row;
-        padding-left: 25px;
+        padding-left: 18.5px;
         justify-content: flex-start;
         
         &__button{
             margin-right: 20px;
+            padding: 5px;
+            border: 1px solid grey;
         }
     }
 }

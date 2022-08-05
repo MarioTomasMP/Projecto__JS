@@ -20,6 +20,8 @@ class Turno {
 }
 
 
+
+
 //toma los datos ingresados en el html
 
 let formulario = document.getElementById("form");
@@ -28,19 +30,20 @@ formulario.addEventListener('submit', (event) => {
     event.preventDefault();
     console.dir(event.target.children);
     let valor = event.target.children;
-    console.log(valor[1].value);
+    console.log(valor[0].value, valor[1].value);
 
-    const Turnos = new Turno(valor[0].value, valor[1].value);
+    let Turnos = new Turno(valor[0].value, valor[1].value);
     console.log(Turnos);
-    let turnoNuevo = Turnos
-    if (turnoNuevo) {
 
-        turnoNuevo.SetTurno(turno);
+    
+    if (Turnos) {
+
+        Turnos.SetTurno(turno);
         turno = turno + Math.floor(Math.random() + 1);
-        Miturno.push(turnoNuevo);
-        alert("Turno guardado")
+        Miturno.push(Turnos);
+        alert("Su turno ha sido guardado.")
     }else {
-        alert("No se pudo guardar el turno");
+        alert("Su solicitus de turno fue erronea, intentelo nuevamente.");
     }
 })
 

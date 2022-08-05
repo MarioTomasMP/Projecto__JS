@@ -25,6 +25,7 @@
 }
 .header__logo {
   padding: 1rem;
+  width: 160px;
 }
 .header__nav {
   display: flex;
@@ -43,15 +44,18 @@
 
 .container {
   background: white;
+  padding: 1rem;
 }
 .container__btn {
   display: flex;
   flex-direction: row;
-  padding-left: 25px;
+  padding-left: 18.5px;
   justify-content: flex-start;
 }
 .container__btn__button {
   margin-right: 20px;
+  padding: 5px;
+  border: 1px solid grey;
 }
 
 .form {
