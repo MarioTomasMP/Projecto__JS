@@ -80,50 +80,6 @@ const ObraSocial= ["osam", "osde", "sancor", "sadop"];
 
 
 
-//Funcion para cargar el turno
-
-
-
-// function pedirTurno(){
-//     let turnoNuevo = SolicitarTurnoNuevo();
-
-//     if (turnoNuevo) {
-
-//         turnoNuevo.SetTurno(turno);
-//         turno = turno + Math.floor(Math.random() + 1);
-//         Miturno.push(turnoNuevo);
-//         alert("Turno guardado")
-//     }else {
-//         alert("No se pudo guardar el turno");
-//     }
-// }
-
-
-// // funcion que solicita especialidad y nombre del doctor;
-
-// function SolicitarTurnoNuevo(){
-//     let pedido = true;
-
-//     while (pedido) {
-//         let mensaje = "";
-//         let especialidad = prompt("Ingrese al profesional que necesita: \npediatria \nclinica medica \nquinesiologia \nanestesiologia");
-//         let doctores = prompt("Ingrese el nombre del medico que quiera que lo atienda: \nPediatra: antonio, muños ; hercules, martinez; jose, muller. \nClinica medica: oscar, rodriguez; marcelo, sanchez. \nAnestesiologia: rosa, marcello; panda, martinez. \nQuimiterapia: ana, marquez.");
-
-//         if (!especialidad){
-//             mensaje += "Debe ingresar una especialida valida";
-//         }
-//         if (!doctores){
-//             mensaje += "Debe ingresar doctor valida";
-//         }
-//         if(mensaje !=""){
-//             alert(mensaje);
-//             pedido = confirm("Quieres cargar de nuevo los datos?");
-//         }else {
-//             return new Turno(especialidad, doctores);
-//         }
-//     }
-// }
-
 //Funcion que elimina el turno
 
 function eliminarTurno(){
@@ -154,20 +110,8 @@ function eliminarTurno(){
                 } else if (result.isDenied) {
                   Swal.fire('Ha conservado el turno', '', 'info')
                 }
-              })
-            // if (TurnoEncontrado) {
-            //     let encontrado = confirm("Desea borrar el turno seleccionado");
-            //     if (encontrado){
-            //         Miturno=Miturno.filter((turno)=> turno.turno != TurnoId);
-            //         Swal.fire({
-            //             position: 'center',
-            //             icon: 'success',
-            //             title: 'Se ha borrado el turno con exito',
-            //             showConfirmButton: false,
-            //             timer: 1200
-            //           });
-            //     }
-            // }
+            })
+
         }
     }
 }
