@@ -30,10 +30,11 @@ formulario.addEventListener('submit', (event) => {
     event.preventDefault();
     console.dir(event.target.children);
     let valor = event.target.children;
-    console.log(valor[0].value, valor[1].value);
 
     let Turnos = new Turno(valor[0].value, valor[1].value);
-    console.log(Turnos);
+
+    formulario.reset()
+    
 
     
     if (Turnos) {
@@ -41,11 +42,28 @@ formulario.addEventListener('submit', (event) => {
         Turnos.SetTurno(turno);
         turno = turno + Math.floor(Math.random() + 1);
         Miturno.push(Turnos);
-        alert("Su turno ha sido guardado.")
+        localStorage.setItem("Misturno", JSON.stringify(Miturno));
+
+        Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Su turno a sido guardado.',
+            showConfirmButton: false,
+            timer: 1200
+          })
     }else {
-        alert("Su solicitus de turno fue erronea, intentelo nuevamente.");
+        Swal.fire({
+            position: 'center',
+            icon: 'error',
+            title: 'Su turno no se a podido guardar, intentelo nuevamente.',
+            showConfirmButton: false,
+            timer: 1200
+          })
     }
 })
+
+
+
 
 
 
@@ -116,14 +134,40 @@ function eliminarTurno(){
 
         if (TurnoId) {
             let TurnoEncontrado = Miturno.find((turno)=> turno.turno == TurnoId);
-
-            if (TurnoEncontrado) {
-                let encontrado = confirm("Desea borrar el turno seleccionado");
-                if (encontrado){
+            Swal.fire({
+                title: 'seguro que quieres eliminar?',
+                showDenyButton: true,
+                showCancelButton: true,
+                confirmButtonText: 'Borrar',
+                denyButtonText: `Conservar`,
+              }).then((result) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isConfirmed) {
                     Miturno=Miturno.filter((turno)=> turno.turno != TurnoId);
-                    alert("Turno eliminado");
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: 'Se ha borrado el turno con exito',
+                        showConfirmButton: false,
+                        timer: 1200
+                      });
+                } else if (result.isDenied) {
+                  Swal.fire('Ha conservado el turno', '', 'info')
                 }
-            }
+              })
+            // if (TurnoEncontrado) {
+            //     let encontrado = confirm("Desea borrar el turno seleccionado");
+            //     if (encontrado){
+            //         Miturno=Miturno.filter((turno)=> turno.turno != TurnoId);
+            //         Swal.fire({
+            //             position: 'center',
+            //             icon: 'success',
+            //             title: 'Se ha borrado el turno con exito',
+            //             showConfirmButton: false,
+            //             timer: 1200
+            //           });
+            //     }
+            // }
         }
     }
 }
@@ -133,7 +177,13 @@ function eliminarTurno(){
 
 function TendreMiTurno(){
     if (Miturno.length == 0){
-        alert("Usted no a sacado turno");
+        Swal.fire({
+            position: 'center',
+            icon: 'error',
+            title: 'No tiene turnos guardados.',
+            showConfirmButton: false,
+            timer: 1200
+          })
         return false;
     }
     return true;
@@ -149,11 +199,11 @@ function mostrarTurnos(){
 
 //Funcion que recrorre mis turnos
 function verTurno() {
-    let mensaje = "Sus turnos son:"
+    let mensaje = "Sus turnos son: "
 
     Miturno.forEach(doctor => {
         mensaje += doctor.descricionTurno() + "\n"});
-    alert(mensaje);
+        Swal.fire(mensaje);
 }
 
 
