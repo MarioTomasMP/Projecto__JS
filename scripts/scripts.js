@@ -99,10 +99,9 @@ function eliminarTurno(){
     if(TendreMiTurno()){
         verTurno();
         let TurnoId = parseInt(prompt("Ingrese el numero del turno que desea cancelar:"));
-
+        console.log(TurnoId);
         if (TurnoId) {
             let TurnoEncontrado = Misturno.find((turno)=> turno.turno == TurnoId);
-            localStorage.removeItem("Miturno", JSON.stringify(Misturno));
             Swal.fire({
                 title: 'seguro que quieres eliminar?',
                 showDenyButton: true,
@@ -113,6 +112,7 @@ function eliminarTurno(){
                 
                 if (result.isConfirmed) {
                     Misturno=Misturno.filter((turno)=> turno.turno != TurnoId);
+                    eliminarStorage();
                     Swal.fire({
                         position: 'center',
                         icon: 'success',
@@ -127,6 +127,16 @@ function eliminarTurno(){
 
         }
     }
+}
+
+
+//Borra del Storage segun el id
+function eliminarStorage (TurnoId) {
+    let Misturno = JSON.parse(localStorage.getItem("Miturno"));
+    let MisturnoEnStorage = Misturno.findIndex(el => el.turno === TurnoId);
+    Misturno.splice(MisturnoEnStorage, 1);
+    let MisturnoJSON = JSON.stringify(Misturno);
+    localStorage.setItem("Miturno", MisturnoJSON);
 }
 
 
