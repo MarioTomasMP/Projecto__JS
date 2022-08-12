@@ -4,6 +4,15 @@
   box-sizing: border-box;
 }
 
+body {
+  background: white;
+  font-family: "Source Sans Pro", sans-serif;
+}
+
+a {
+  text-decoration: none;
+}
+
 .seccion {
   width: 45%;
   margin: 0 auto;
@@ -64,11 +73,24 @@
   justify-content: space-around;
   padding-top: 20px;
   height: 60px;
+  width: 460px;
 }
 .form__box {
   padding-left: 2rem;
 }
 .form__button {
+  margin-left: 20px;
+  margin-right: -7.5rem;
+  width: 250px;
   border: 1px solid grey;
   border-radius: 5px;
+}
+
+.container__list {
+  display: flex;
+  flex-direction: row;
+}
+
+.container__list li {
+  list-style: none;
 }/*# sourceMappingURL=styles.css.map */

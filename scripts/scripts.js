@@ -1,5 +1,5 @@
 let turno= Math.floor(Math.random() + 1);
-let Miturno=[];
+let Misturno=[];
 
 class Turno {
     constructor(especialidad, doctores){
@@ -19,7 +19,10 @@ class Turno {
     }
 }
 
-
+window.addEventListener("load", ()=> {
+    let baseDatos = JSON.parse(localStorage.getItem("Miturno"))
+    console.log(baseDatos);
+})
 
 
 //toma los datos ingresados en el html
@@ -35,14 +38,13 @@ formulario.addEventListener('submit', (event) => {
 
     formulario.reset()
     
-
-    
     if (Turnos) {
 
         Turnos.SetTurno(turno);
         turno = turno + Math.floor(Math.random() + 1);
-        Miturno.push(Turnos);
-        localStorage.setItem("Misturno", JSON.stringify(Miturno));
+        Misturno.push(Turnos);
+        console.log(Misturno)
+        localStorage.setItem("Miturno", JSON.stringify(Misturno));
 
         Swal.fire({
             position: 'center',
@@ -62,7 +64,17 @@ formulario.addEventListener('submit', (event) => {
     }
 })
 
-
+const generarLista = () => {
+    let contenedor = document.getElementById("container__list");
+    Misturno.map( el => contenedor.innerHTML += `
+    <div class="card" id="${el.turno}" style="width: 18rem;">
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">${el.turno}${el.especialidad}${el.doctores}</li>
+      <li class="list-group-item">A second item</li>
+      <li class="list-group-item">A third item</li>
+    </ul>
+  </div>
+`)}
 
 
 
@@ -89,7 +101,8 @@ function eliminarTurno(){
         let TurnoId = parseInt(prompt("Ingrese el numero del turno que desea cancelar:"));
 
         if (TurnoId) {
-            let TurnoEncontrado = Miturno.find((turno)=> turno.turno == TurnoId);
+            let TurnoEncontrado = Misturno.find((turno)=> turno.turno == TurnoId);
+            localStorage.removeItem("Miturno", JSON.stringify(Misturno));
             Swal.fire({
                 title: 'seguro que quieres eliminar?',
                 showDenyButton: true,
@@ -97,9 +110,9 @@ function eliminarTurno(){
                 confirmButtonText: 'Borrar',
                 denyButtonText: `Conservar`,
               }).then((result) => {
-                /* Read more about isConfirmed, isDenied below */
+                
                 if (result.isConfirmed) {
-                    Miturno=Miturno.filter((turno)=> turno.turno != TurnoId);
+                    Misturno=Misturno.filter((turno)=> turno.turno != TurnoId);
                     Swal.fire({
                         position: 'center',
                         icon: 'success',
@@ -120,7 +133,7 @@ function eliminarTurno(){
 //Funcion para vel el turno guardado
 
 function TendreMiTurno(){
-    if (Miturno.length == 0){
+    if (Misturno.length == 0){
         Swal.fire({
             position: 'center',
             icon: 'error',
@@ -144,20 +157,15 @@ function mostrarTurnos(){
 //Funcion que recrorre mis turnos
 function verTurno() {
     let mensaje = "Sus turnos son: "
-
-    Miturno.forEach(doctor => {
+    
+    Misturno.forEach(doctor => {
         mensaje += doctor.descricionTurno() + "\n"});
         Swal.fire(mensaje);
 }
 
 
-// let btnPedirTurno = document.getElementById('btnPedirTurno');
-// function handleBtnPedirTurno () {
-//     return pedirTurno()
-// }
 
 
-// btnPedirTurno.onclick = handleBtnPedirTurno;
 
 let btnEliminarTurno = document.getElementById('btnEliminarTurno');
 function handleBtnEliminarTurno () {
