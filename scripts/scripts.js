@@ -11,7 +11,7 @@ class Turno {
     SetTurno(nuevoTurno) {
         this.turno = nuevoTurno;
     }
-    descricionTurno() {
+    descripcionTurno() {
         return (`${this.turno} - ${this.especialidad} - ${this.doctores}`)
     }
     TengoTurno(){
@@ -20,10 +20,33 @@ class Turno {
 }
 
 window.addEventListener("load", ()=> {
-    let baseDatos = JSON.parse(localStorage.getItem("Miturno"))
+    let baseDatos = JSON.parse(localStorage.getItem("Miturno"));
     console.log(baseDatos);
 })
 
+const fetchPokemones = () => {
+    fetch('https://pokeapi.co/api/v2/pokemon/ditto')
+    .then(response => response.json())
+    .then(data => console.log(data))
+}
+
+const renderizarPokemon = (pokemones) => {
+    const containerPokemones = document.getElementById('container__comentarios');
+    for(let pokemon of pokemones){
+        containerPokemones.innerHTML += `
+        <div class="card" style="width: 18rem;">
+            <img src="${pokemon.sprites}"
+            <div class="card-body">
+                <h5 class="card-title">${pokemon.species}</h5>
+                <p class="card-text">${pokemon.name}</p>
+            </div>
+        </div>
+        `
+    }
+}
+
+const btnFetchComentarios = document.getElementById('btn-comentarios');
+btnFetchComentarios.addEventListener('click', fetchPokemones);
 
 //toma los datos ingresados en el html
 
@@ -88,7 +111,7 @@ const Medicos = [{Especialidad: "clinica medica", Doctor: "oscar, rodriguez"},
     {Especialidad: "pediatria", Doctor: "hercules, martinez"},
     {Especialidad: "pediatria", Doctor: "jose, muller"}];
 
-const ObraSocial= ["osam", "osde", "sancor", "sadop"];
+
 
 
 
@@ -168,8 +191,8 @@ function mostrarTurnos(){
 function verTurno() {
     let mensaje = "Sus turnos son: "
     
-    Misturno.forEach(doctor => {
-        mensaje += doctor.descricionTurno() + "\n"});
+    Misturno.forEach((doctor) => {
+        mensaje += doctor.descripcionTurno() + "\n"});
         Swal.fire(mensaje);
 }
 
