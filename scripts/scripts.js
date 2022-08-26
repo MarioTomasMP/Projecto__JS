@@ -1,4 +1,4 @@
-let turno= Math.floor(Math.random() + 1);
+let turno = Math.floor(Math.random() + 1);
 let Misturno=[];
 
 class Turno {
@@ -22,31 +22,33 @@ class Turno {
 window.addEventListener("load", ()=> {
     let baseDatos = JSON.parse(localStorage.getItem("Miturno"));
     console.log(baseDatos);
+    fetchComentarios()
 })
 
-const fetchPokemones = () => {
-    fetch('https://pokeapi.co/api/v2/pokemon/ditto')
+
+//Fechea un api 
+
+const fetchComentarios = () => {
+    fetch('./scripts/comentarios.json')
     .then(response => response.json())
     .then(data => console.log(data))
+    .then(renderComentarios())
 }
 
-const renderizarPokemon = (pokemones) => {
-    const containerPokemones = document.getElementById('container__comentarios');
-    for(let pokemon of pokemones){
-        containerPokemones.innerHTML += `
-        <div class="card" style="width: 18rem;">
-            <img src="${pokemon.sprites}"
-            <div class="card-body">
-                <h5 class="card-title">${pokemon.species}</h5>
-                <p class="card-text">${pokemon.name}</p>
-            </div>
-        </div>
-        `
+const renderComentarios = () => {
+    const containerComentarios = document.getElementById('container__comentarios');
+    for(comentario of comentarios){
+        containerComentarios.innerHTML += `
+            <div class="card m-3" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">${comentario.name}</h5>
+                    <p class="card-text">${comentario.body}</p>
+                    <p class="card-text"><small class="text-muted">${comentario.email}</small></p>
+                </div>
+            </div>`
     }
 }
 
-const btnFetchComentarios = document.getElementById('btn-comentarios');
-btnFetchComentarios.addEventListener('click', fetchPokemones);
 
 //toma los datos ingresados en el html
 
@@ -56,6 +58,7 @@ formulario.addEventListener('submit', (event) => {
     event.preventDefault();
     console.dir(event.target.children);
     let valor = event.target.children;
+
 
     let Turnos = new Turno(valor[0].value, valor[1].value);
 
@@ -88,15 +91,15 @@ formulario.addEventListener('submit', (event) => {
 })
 
 const generarLista = () => {
-    let contenedor = document.getElementById("container__list");
+    let contenedor = document.getElementById("container__lista");
     Misturno.map( el => contenedor.innerHTML += `
     <div class="card" id="${el.turno}" style="width: 18rem;">
-    <ul class="list-group list-group-flush">
-      <li class="list-group-item">${el.turno}${el.especialidad}${el.doctores}</li>
-      <li class="list-group-item">A second item</li>
-      <li class="list-group-item">A third item</li>
-    </ul>
-  </div>
+        <ul class="list-group list-group-flush">
+        <li class="list-group-item">${el.turno}</li>
+        <li class="list-group-item">${el.especialidad}</li>
+        <li class="list-group-item">${el.doctores}</li>
+        </ul>
+    </div>
 `)}
 
 
