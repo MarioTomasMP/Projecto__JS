@@ -28,26 +28,46 @@ window.addEventListener("load", ()=> {
 
 //Fechea un api 
 
-const fetchComentarios = () => {
-    fetch('./scripts/comentarios.json')
-    .then(response => response.json())
-    .then(data => console.log(data))
-    .then(renderComentarios())
-}
+// const fetchComentarios = () => {
+//     fetch('./scripts/comentarios.json')
+//     .then(response => response.json())
+//     .then(data => console.log(data))
+//     .then(renderComentarios())
+// }
 
-const renderComentarios = () => {
-    const containerComentarios = document.getElementById('container__comentarios');
-    for(comentario of comentarios){
-        containerComentarios.innerHTML += `
-            <div class="card m-3" style="width: 18rem;">
+// const renderComentarios = () => {
+//     const containerComentarios = document.getElementById('container__comentarios');
+//     for(comentario of comentarios){
+//         containerComentarios.innerHTML += `
+//             <div class="card m-3" style="width: 18rem;">
+//                 <div class="card-body">
+//                     <h5 class="card-title">${comentario.name}</h5>
+//                     <p class="card-text">${comentario.body}</p>
+//                     <p class="card-text"><small class="text-muted">${comentario.email}</small></p>
+//                 </div>
+//             </div>`
+//     }
+// }
+
+fetch('./scripts/comentarios.json')
+    .then( (res) => res.json() )
+    .then( (data) => {
+    console.log(data)
+    data.forEach((comentario) =>{
+    const containerComentarios = document.createElement('div');
+    containerComentarios.innerHTML= `
+            <div class="card m-8" style="width: 16rem;">
                 <div class="card-body">
                     <h5 class="card-title">${comentario.name}</h5>
                     <p class="card-text">${comentario.body}</p>
                     <p class="card-text"><small class="text-muted">${comentario.email}</small></p>
                 </div>
-            </div>`
-    }
-}
+            </div>
+            `
+            ;
+        comentarios.append(containerComentarios);
+})
+})
 
 
 //toma los datos ingresados en el html
