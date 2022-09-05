@@ -33,25 +33,11 @@
                     <button class="container__btn__button" id="btnMostrarTurno">Mostrar mis turnos</button>
                 </div>
                 <form action="" id="form" class="form">
-                    <select class="form-select" aria-label="Default select example">
-                        <option selected>Especialidad</option>
-                        <option value="Pediatria">Pediatria</option>
-                        <option value="Anestesiologia">Anestesiologia</option>
-                        <option value="Quimioterapia">Quimioterapia</option>
-                        <option value="Clinica Medica">Clinica Medica</option>
-                        <option value="Cardiologia">Cardiologia</option>
+                    <select class="form-select" aria-label="Default select example" id="select-especialidad">
+                        
                     </select>
-                    <select class="form-select" aria-label="Default select example" id="select">
-                        <option selected>Doctor</option>
-                        <option value="Hercules Martinez">Hercules Martinez</option>
-                        <option value="Antonio Perez">Antonio Perez</option>
-                        <option value="Marcos Juarez">Marcos Juarez</option>
-                        <option value="Maria Dominguez">Maria Dominguez</option>
-                        <option value="Teresa Muller">Teresa Muller</option>
-                        <option value="Juan Suarez">Juan Suarez</option>
-                        <option value="Marina Diaz">Marina Diaz</option>
-                        <option value="Tomas Petinari">Tomas Petinari</option>
-                        <option value="Ornella Deneri">Ornella Deneri</option>
+                    <select class="form-select" aria-label="Default select example" id="select-doctores">
+
                     </select>
                     <button class="form__button" type="submit" id="btnPedir">Pedir Turno</button>
                 </form>
@@ -61,7 +47,7 @@
             <div id="container__lista">
 
             </div>
-            <div id="comentarios" class="d-flex justify-content-around">
+            <div id="comentarios" class="d-flex justify-content-between container__comentarios">
 
             </div>
         </section>

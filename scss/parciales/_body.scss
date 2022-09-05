@@ -47,3 +47,12 @@
     list-style: none;
 }
 
+.container__comentarios {
+    display: flex;
+    flex-direction: row;
+    margin-top: 5.4rem;
+    margin-right: 6.7rem;
+    margin-left: 6.7rem;
+    overflow: auto;
+
+}

@@ -33,5 +33,34 @@
       "name": "Veronica",
       "email": "YaNoSeMeOcurrenMails@gmeil.com",
       "body": "La mejor clinica que he visitado en mi vida <3"
+    },
+    {
+      "postId": 1,
+      "id": 6,
+      "name": "Luciana",
+      "email": "UnMailAlAzar@gmeil.com",
+      "body": "Los voy a recomendar"
+    },
+    {
+      "postId": 1,
+      "id": 7,
+      "name": "Marcos",
+      "email": "Marquitos_10@gmeil.com",
+      "body": "Aguante clinica parque!"
+    },
+    {
+      "postId": 1,
+      "id": 8,
+      "name": "Tomas",
+      "email": "Elturkito20@gmeil.com",
+      "body": "Recomendadisimos!!!"
+    },
+    {
+      "postId": 1,
+      "id": 9,
+      "name": "Ornella",
+      "email": "Ornepro@gmeil.com",
+      "body": "Si me tengo que atender en algun lado, que sea en clinica parque!"
     }
+    
   ]

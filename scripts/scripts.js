@@ -1,5 +1,6 @@
 let turno = Math.floor(Math.random() + 1);
 let Misturno=[];
+let blanco=[];
 
 class Turno {
     constructor(especialidad, doctores){
@@ -22,32 +23,8 @@ class Turno {
 window.addEventListener("load", ()=> {
     let baseDatos = JSON.parse(localStorage.getItem("Miturno"));
     console.log(baseDatos);
-    fetchComentarios()
 })
 
-
-//Fechea un api 
-
-// const fetchComentarios = () => {
-//     fetch('./scripts/comentarios.json')
-//     .then(response => response.json())
-//     .then(data => console.log(data))
-//     .then(renderComentarios())
-// }
-
-// const renderComentarios = () => {
-//     const containerComentarios = document.getElementById('container__comentarios');
-//     for(comentario of comentarios){
-//         containerComentarios.innerHTML += `
-//             <div class="card m-3" style="width: 18rem;">
-//                 <div class="card-body">
-//                     <h5 class="card-title">${comentario.name}</h5>
-//                     <p class="card-text">${comentario.body}</p>
-//                     <p class="card-text"><small class="text-muted">${comentario.email}</small></p>
-//                 </div>
-//             </div>`
-//     }
-// }
 
 fetch('./scripts/comentarios.json')
     .then( (res) => res.json() )
@@ -55,8 +32,9 @@ fetch('./scripts/comentarios.json')
     console.log(data)
     data.forEach((comentario) =>{
     const containerComentarios = document.createElement('div');
+    const comentarios = document.getElementById('comentarios')
     containerComentarios.innerHTML= `
-            <div class="card m-8" style="width: 16rem;">
+            <div class="card m-12" style="width: 18rem; background-color: #15599E; color:black;">
                 <div class="card-body">
                     <h5 class="card-title">${comentario.name}</h5>
                     <p class="card-text">${comentario.body}</p>
@@ -70,17 +48,76 @@ fetch('./scripts/comentarios.json')
 })
 
 
-//toma los datos ingresados en el html
+
+
+//Datos del Formulario
+
+
+
+let pediatria = ["Hercules Martinez", "Ornella Deneri", "Ximena, Ortega", "Vanesa, Hernandez"];
+let anestesiologia = ["Marina Diaz", "Tomas Petinari", "Mario, Rodriguez", "Esteban Morales", "Cretina Fernandez K"];
+let quimioterapia = ["Marcos Juarez", "Rosario Acuña", "Carmen Mernez"];
+let clinicaMedica = ["Hercules Martinez", "Antonio Perez", "Luciano Moran", "Mateo Muller", "Jose Maria Luciani"];
+let cardiologia = ["Maria Dominguez", "Javier Mileia", "Alberzo Fernandez"];
+
+
+//Opciones a elegir
+
+let lasEspecialidades = ['Pediatria', 'Anestesiologia', 'Clinica Medica', 'Cardiologia', 'Quimioterapia'];
+
+let losDoctores = ["Hercules Martinez", "Ornella Deneri", "Marina Diaz", "Tomas Petinari", "Marcos Juarez", "Antonio Perez", "Maria Dominguez"];
+
+
+
+
+
+//Funcion que muestra las opciones a elegir y las elegidas
 
 let formulario = document.getElementById("form");
+let selectEsp = document.getElementById('select-especialidad');
+let selectDoc = document.getElementById('select-doctores');
+
+function mostrarSelect(array, lugar){
+    let elementos = '<option selected disables>--Seleccione--</option>'
+
+    for(let i = 0; i < array.length; i++){
+        elementos += '<option value="'+array[i]+'">'+array[i]+'</option>'
+    }
+    lugar.innerHTML=elementos
+}
+
+mostrarSelect(blanco, selectDoc);
+mostrarSelect(lasEspecialidades, selectEsp);
+
+selectEsp.addEventListener('change', ()=>{
+    let valor = selectEsp.value;
+
+    if(valor=="Anestesiologia"){
+        mostrarSelect(anestesiologia, selectDoc);
+    }else if(valor=="Clinica Medica"){
+        mostrarSelect(clinicaMedica, selectDoc);
+    }else if(valor=="Quimioterapia"){
+        mostrarSelect(quimioterapia, selectDoc);
+    }else if(valor=="Cardiologia"){
+        mostrarSelect(cardiologia, selectDoc);
+    }else{
+        mostrarSelect(pediatria, selectDoc);
+    }
+    
+
+})
+
+//Evento que se produce al precionar el boton de pedir
 
 formulario.addEventListener('submit', (event) => {
     event.preventDefault();
+
+
     console.dir(event.target.children);
-    let valor = event.target.children;
+    let valorSubmit = event.target.children;
 
 
-    let Turnos = new Turno(valor[0].value, valor[1].value);
+    let Turnos = new Turno(valorSubmit[0].value, valorSubmit[1].value);
 
     formulario.reset()
     
@@ -110,6 +147,9 @@ formulario.addEventListener('submit', (event) => {
     }
 })
 
+
+
+
 const generarLista = () => {
     let contenedor = document.getElementById("container__lista");
     Misturno.map( el => contenedor.innerHTML += `
@@ -120,21 +160,8 @@ const generarLista = () => {
         <li class="list-group-item">${el.doctores}</li>
         </ul>
     </div>
-`)}
-
-
-
-
-const Medicos = [{Especialidad: "clinica medica", Doctor: "oscar, rodriguez"},
-    {Especialidad: "anestesiologia", Doctor: "rosa, marcello"},
-    {Especialidad: "quimioterapia", Doctor: "ana, marquez"},
-    {Especialidad: "clinica medica", Doctor: "marcelo, sanchez"},
-    {Especialidad: "pediatria", Doctor: "antonio, muñoz"},
-    {Especialidad: "anestesiologia", Doctor: "panda, martinez"},
-    {Especialidad: "pediatria", Doctor: "hercules, martinez"},
-    {Especialidad: "pediatria", Doctor: "jose, muller"}];
-
-
+`
+)}
 
 
 
